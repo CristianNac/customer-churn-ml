@@ -1,8 +1,8 @@
-#**Proyecto para predecir fuga de clientes**
+# **Proyecto para predecir fuga de clientes**
 
 La idea de este proyecto es construir un modelo de Machine Learning que permita tomar decisiones de acuerdo a las características o variables que más influyen en la fuga de clientes.
 
-#**Estructura del proyecto**
+# **Estructura del proyecto**
 
 * Notebook/ Eda_Telco_Churn.ipynb: Este archivo contiene el análisis exploratorio, donde se revisa la calidad de los datos (Existencia de valores nulos, valores duplicados), también se analiza el balance de los datos para la variable predictora y también vemos correlaciones y distribución de variables.
 
@@ -12,20 +12,20 @@ La idea de este proyecto es construir un modelo de Machine Learning que permita 
 
 * metric_results/: Archivo csv donde se guardan las métricas para los distintos modelos.
 
-#**Tecnologías**
+# **Tecnologías**
 
 - Python 3.13 
-##**Librerías de visualización**
+## **Librerías de visualización**
 - Matplotlib
 - Seaborn 
-##**Librerías para entrenar modelos**
+## **Librerías para entrenar modelos**
 - sklearn
 - imblearn
 - xgboost
 - Optuna 
-##**Librerías para procesamiento de datos**
+## **Librerías para procesamiento de datos**
 - Pandas
 - Sklearn
 - Feature Engine 
-##**Librerías para explicabilidad de modelos**
+## **Librerías para explicabilidad de modelos**
 - Shap

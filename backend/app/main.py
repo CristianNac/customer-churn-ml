@@ -1,7 +1,13 @@
 from fastapi import FastAPI
 
-app = FastAPI(title='ML-Churn-Project')
+from api.v1.metrics.router import router as metric_router
 
-@app.get('/')
-def home():
-    return 'Hola mundo'
+
+def create_app() -> FastAPI:
+    app = FastAPI(title='ML-Churn')
+    app.include_router(metric_router)
+    return app
+
+app = create_app()
+
+

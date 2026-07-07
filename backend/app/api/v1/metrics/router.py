@@ -1,14 +1,22 @@
 import json
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
+
+from core.paths import METRIC_PATH
 
 router = APIRouter(prefix='/metrics', tags=['metrics'])
 
 @router.get('/')
 def get_metrics():
     try:
-        with open('../../../../metric_results/metrics_best_model.json') as file:
-            return json.load(file) 
-        
+        with open(METRIC_PATH) as file:
+            return json.load(file)
+
+    except FileNotFoundError as error:
+        raise HTTPException(
+            status_code=404, detail='No se encontraron las métricas del modelo'
+        ) from error
     except Exception as error:
-        print(error)
+        raise HTTPException(
+            status_code=500, detail='Error al leer las métricas del modelo'
+        ) from error

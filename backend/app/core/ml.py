@@ -8,3 +8,4 @@ def load_model():
     untrusted = sio.get_untrusted_types(file=MODEL_V2_PATH)
 
     return sio.load(MODEL_V2_PATH, trusted=untrusted)
+

@@ -1,5 +1,7 @@
 .prettierignore
-__pycache__
-.mypy_cache
-.ruff_cache
+__pycache__/
+.mypy_cache/
+.ruff_cache/
 .env
+.pytest_cache/
+.venv/

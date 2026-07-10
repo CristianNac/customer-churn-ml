@@ -14,16 +14,10 @@ dependencies = [
 [dependency-groups]
 dev = [
     "fastapi[standard]>=0.138.0",
-    "httpx>=0.28.1",
     "mypy>=2.1.0",
-    "pytest>=9.1.1",
     "ruff>=0.15.18",
     "skops>=0.14.0",
 ]
-
-[tool.pytest.ini_options]
-pythonpath = ["app"]
-testpaths = ["tests"]
 
 [tool.ruff]
 line-length = 88

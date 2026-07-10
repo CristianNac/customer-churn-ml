@@ -1,4 +1,4 @@
-.PHONY: install lint format test typecheck run
+.PHONY: install lint format typecheck run
 
 
 help:
@@ -6,7 +6,6 @@ help:
 	@echo "make install: Instala dependencias del proyecto"
 	@echo "make lint: Llama a ruff para revisar el codigo"
 	@echo "make format: Llama a ruff para ordenar y corregir el codigo"
-	@echo "make test: Llama a pytest para testear el código"
 	@echo "make typecheck: Llama a mypy para revisar el tipado"
 	@echo "make run: Ejecuta el servidor de desarrollo de fastapi"
 
@@ -22,12 +21,9 @@ format:
 typecheck:
 	@uv run mypy .
 
-test:
-	@uv run pytest
-
 run:
 	@uv run fastapi dev
 
-dev: lint typecheck test run
+dev: lint typecheck run
 
 

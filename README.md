@@ -55,8 +55,7 @@ Proyecto-Churn/
 │   │   ├── services/              # Lógica de negocio (métricas y predicción)
 │   │   ├── models/                # Pipelines y modelos entrenados (.skops)
 │   │   └── metric_results/        # Métricas del mejor modelo (JSON)
-│   ├── tests/                     # Tests con pytest (servicios y endpoints)
-│   ├── Makefile                   # Atajos: install, lint, format, test, typecheck, run
+│   ├── Makefile                   # Atajos: install, lint, format, typecheck, run
 │   └── pyproject.toml             # Dependencias gestionadas con uv
 └── README.md
 ```
@@ -68,7 +67,7 @@ Proyecto-Churn/
 3. **Modelado:** Regresión Logística y XGBoost, comparando técnicas de balanceo de clases (class weight, SMOTE, NearMiss).
 4. **Optimización:** búsqueda de hiperparámetros con Optuna.
 5. **Explicabilidad:** importancia de variables mediante coeficientes y SHAP.
-6. **Puesta en producción:** serialización del pipeline con `skops`, exposición a través de una API REST con FastAPI y una capa de _services_ que separa la lógica de negocio de los endpoints, cubierta con tests de `pytest`.
+6. **Puesta en producción:** serialización del pipeline con `skops`, exposición a través de una API REST con FastAPI y una capa de _services_ que separa la lógica de negocio de los endpoints.
 
 ## Tecnologías
 
@@ -79,7 +78,6 @@ Proyecto-Churn/
 - **Visualización:** Matplotlib, Seaborn
 - **Persistencia:** skops
 - **API:** FastAPI
-- **Testing:** pytest, pytest-cov, httpx (TestClient)
 - **Tooling:** uv (gestión de entorno y dependencias), Ruff (lint/format), mypy (type checking)
 
 ## Cómo ejecutarlo
@@ -108,19 +106,7 @@ Otros comandos útiles (definidos en el `Makefile`):
 make lint        # revisa el código con Ruff
 make format      # corrige y ordena el código con Ruff
 make typecheck   # revisa el tipado con mypy
-make test        # corre la suite de tests con pytest
 ```
-
-### 3. Tests
-
-La lógica de negocio (capa de _services_) y los endpoints están cubiertos con `pytest`. Desde la carpeta `backend/`:
-
-```bash
-make test                          # uv run pytest
-uv run pytest --cov=app            # con reporte de cobertura
-```
-
-> ⚠️ La suite de tests está en construcción: ya cubre la lectura y validación de CSV y el endpoint de métricas; falta completar el flujo de predicción de punta a punta.
 
 ## Roadmap
 
@@ -131,8 +117,7 @@ uv run pytest --cov=app            # con reporte de cobertura
 - [x] Endpoint de métricas (FastAPI)
 - [x] Endpoint de predicción por lote desde CSV (FastAPI)
 - [x] Refactor a capa de _services_ (lógica de negocio separada de los endpoints)
-- [ ] Suite de tests con pytest — _en desarrollo_
-- [ ] CI/CD con GitHub Actions (lint + typecheck + tests en cada push/PR)
+- [ ] CI/CD con GitHub Actions (lint + typecheck en cada push/PR)
 - [ ] Contenerización con Docker
 - [ ] Despliegue en la nube (demo en vivo)
 

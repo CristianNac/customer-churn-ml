@@ -1,6 +1,6 @@
 import io
-import pandas as pd
 
+import pandas as pd
 
 UMBRAL = 0.5
 
@@ -15,15 +15,12 @@ class ColumnasFaltantesError(Exception):
         self.message = message
         super().__init__(self.message)
 
-
-
-
 def leer_csv(contenido:bytes)->pd.DataFrame:
     try:
         df = pd.read_csv(io.BytesIO(contenido))
 
     except pd.errors.EmptyDataError:
-        raise CSVEmptyError()
+        raise CSVEmptyError() from None
 
     except (pd.errors.ParserError, UnicodeDecodeError):
         df = pd.read_csv(io.BytesIO(contenido), sep=';', encoding='latin-1')

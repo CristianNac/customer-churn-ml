@@ -1,8 +1,7 @@
 import skops.io as sio
 
-from core.transformers import ColumnSelector  # noqa: F401
 from core.paths import MODEL_V1_PATH, MODEL_V2_PATH
-
+from core.transformers import ColumnSelector  # noqa: F401
 
 untrusted = sio.get_untrusted_types(file=MODEL_V1_PATH)
 # print("Antes", untrusted)

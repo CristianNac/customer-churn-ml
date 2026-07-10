@@ -1,9 +1,7 @@
-import json
 
-from services.metrics_service import read_metrics
 from fastapi import APIRouter, HTTPException
 
-from core.paths import METRIC_PATH
+from services.metrics_service import read_metrics
 
 router = APIRouter(prefix='/metrics', tags=['metrics'])
 

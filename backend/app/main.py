@@ -7,7 +7,6 @@ from api.v1.predict.router import router as predict_router
 from core.ml import load_model  # noqa: F401
 
 
-
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     model = load_model()

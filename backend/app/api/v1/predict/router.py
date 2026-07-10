@@ -2,8 +2,13 @@ from pathlib import Path
 
 from fastapi import APIRouter, HTTPException, Request, Response, UploadFile
 
-from services.prediction_service import CSVEmptyError, ColumnasFaltantesError, predecir, leer_csv, validar_columnas 
-
+from services.prediction_service import (
+    ColumnasFaltantesError,
+    CSVEmptyError,
+    leer_csv,
+    predecir,
+    validar_columnas,
+)
 
 router = APIRouter(prefix='/predict', tags=['predict'])
 

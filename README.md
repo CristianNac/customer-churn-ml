@@ -1,6 +1,10 @@
 # Predicción de Fuga de Clientes (Customer Churn)
 
-> Proyecto de Machine Learning end-to-end que identifica qué clientes están por abandonar un servicio de telecomunicaciones y **explica por qué**, para que un equipo de retención pueda actuar a tiempo. Incluye desde el análisis exploratorio hasta una **API de predicción con FastAPI**.
+> Proyecto de Machine Learning end-to-end que identifica qué clientes están por abandonar un servicio de telecomunicaciones y **explica por qué**, para que un equipo de retención pueda actuar a tiempo. Incluye desde el análisis exploratorio hasta una **API de predicción con FastAPI**, contenerizada con Docker y desplegada en la nube.
+
+**🔗 Demo en vivo:** [ml-churn-model.onrender.com/docs](https://ml-churn-model.onrender.com/docs) — documentación interactiva de la API (Swagger UI).
+
+> ⏳ Alojada en el plan gratuito de Render: si estuvo inactiva un rato, el primer acceso puede tardar ~30-60 s en "despertar". Es el comportamiento normal del _cold start_, no un error.
 
 ## El problema de negocio
 
@@ -56,6 +60,7 @@ Proyecto-Churn/
 │   │   ├── models/                # Pipelines y modelos entrenados (.skops)
 │   │   └── metric_results/        # Métricas del mejor modelo (JSON)
 │   ├── Makefile                   # Atajos: install, lint, format, typecheck, run
+│   ├── Dockerfile                 # Imagen multi-stage para producción
 │   └── pyproject.toml             # Dependencias gestionadas con uv
 └── README.md
 ```
@@ -67,7 +72,7 @@ Proyecto-Churn/
 3. **Modelado:** Regresión Logística y XGBoost, comparando técnicas de balanceo de clases (class weight, SMOTE, NearMiss).
 4. **Optimización:** búsqueda de hiperparámetros con Optuna.
 5. **Explicabilidad:** importancia de variables mediante coeficientes y SHAP.
-6. **Puesta en producción:** serialización del pipeline con `skops`, exposición a través de una API REST con FastAPI y una capa de _services_ que separa la lógica de negocio de los endpoints.
+6. **Puesta en producción:** serialización del pipeline con `skops`, exposición a través de una API REST con FastAPI y una capa de _services_ que separa la lógica de negocio de los endpoints, contenerizada con Docker y desplegada en Render.
 
 ## Tecnologías
 
@@ -78,6 +83,7 @@ Proyecto-Churn/
 - **Visualización:** Matplotlib, Seaborn
 - **Persistencia:** skops
 - **API:** FastAPI
+- **Contenerización y despliegue:** Docker (imagen multi-stage), Render
 - **Tooling:** uv (gestión de entorno y dependencias), Ruff (lint/format), mypy (type checking)
 
 ## Cómo ejecutarlo
@@ -108,6 +114,18 @@ make format      # corrige y ordena el código con Ruff
 make typecheck   # revisa el tipado con mypy
 ```
 
+### 3. Con Docker
+
+El backend incluye un `Dockerfile` multi-stage que produce una imagen mínima de producción. Desde la carpeta `backend/`:
+
+```bash
+cd backend
+docker build -t ml-churn:v1 .
+docker run --rm -p 8000:8000 ml-churn:v1
+```
+
+La API queda disponible en `http://localhost:8000/docs`. La imagen lee la variable de entorno `PORT` (con 8000 por defecto), lo que la hace compatible con plataformas como Render.
+
 ## Roadmap
 
 - [x] Análisis exploratorio (EDA)
@@ -117,9 +135,9 @@ make typecheck   # revisa el tipado con mypy
 - [x] Endpoint de métricas (FastAPI)
 - [x] Endpoint de predicción por lote desde CSV (FastAPI)
 - [x] Refactor a capa de _services_ (lógica de negocio separada de los endpoints)
+- [x] Contenerización con Docker (imagen multi-stage)
+- [x] Despliegue en la nube — [demo en vivo en Render](https://ml-churn-model.onrender.com/docs)
 - [ ] CI/CD con GitHub Actions (lint + typecheck en cada push/PR)
-- [ ] Contenerización con Docker
-- [ ] Despliegue en la nube (demo en vivo)
 
 ## Autor
 
